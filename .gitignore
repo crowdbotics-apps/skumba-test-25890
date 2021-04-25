@@ -6,3 +6,4 @@ staticfiles/
 postgres-data/
 .idea
 .vscode
+TEST_DB
