@@ -1,5 +1,5 @@
 from django.urls import path
-from .viewsets import AppViewSet
+from .viewsets import AppViewSet, PlanViewSet
 
 urlpatterns = [
     path(
@@ -15,5 +15,7 @@ urlpatterns = [
             "patch": "partial_update",
             "delete": "destroy"
         })
-    )
+    ),
+    path("plans/", PlanViewSet.as_view({"get": "list"})),
+    path("plans/<int:pk>/", PlanViewSet.as_view({"get": "retrieve"}))
 ]

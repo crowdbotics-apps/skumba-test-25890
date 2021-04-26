@@ -76,6 +76,7 @@ class App(BaseModelMixin):
 
 
 class Plan(BaseModelMixin):
+    id: int = models.BigAutoField(primary_key=True)
     name: str = models.CharField(
         max_length=20,
         default=PlanNameChoices.FREE.value,
@@ -110,6 +111,7 @@ class Plan(BaseModelMixin):
 
 
 class Subscription(BaseModelMixin):
+    id: int = models.BigAutoField(primary_key=True)
     app = models.OneToOneField(
         App,
         on_delete=models.CASCADE,

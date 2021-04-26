@@ -16,16 +16,17 @@ class AppSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = App
-        fields = '__all__'
+        fields = "__all__"
 
 
 class PlanSerializer(serializers.ModelSerializer):
     class Meta:
         model = Plan
-        fields = '__all__'
+        fields = ["id", "name", "description", "price", "created_at",
+                  "updated_at"]
 
 
 class SubscriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subscription
-        fields = '__all__'
+        fields = "__all__"
