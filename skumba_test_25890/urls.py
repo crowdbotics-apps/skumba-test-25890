@@ -35,9 +35,9 @@ urlpatterns = [
     path("rest-auth/registration/", include("rest_auth.registration.urls")),
 ]
 
-admin.site.site_header = "skumba-test"
-admin.site.site_title = "skumba-test Admin Portal"
-admin.site.index_title = "skumba-test Admin"
+admin.site.site_header = "skumba-test-django"
+admin.site.site_title = "skumba-test-django Admin Portal"
+admin.site.index_title = "skumba-test-django Admin"
 
 # swagger
 api_info = openapi.Info(
