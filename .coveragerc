@@ -1,0 +1,27 @@
+[run]
+branch = True
+source = "."
+
+[report]
+exclude_lines =
+    if self.debug:
+    pragma: no cover
+    raise NotImplementedError
+    if __name__ == .__main__.:
+ignore_errors = True
+omit =
+    */migrations/*
+    */site-packages/*
+    *virtualenvs/*
+    */manage.py
+    */tests/*
+    */settings/*
+    modules/*
+    skumba_test_25890/*
+    */management/*
+    */static/*
+    *apps.py*
+    */distutils/*
+    tests/*
+
+show_missing = True

@@ -2,7 +2,14 @@ import pytest
 from django.conf import settings
 from django.urls import reverse, resolve
 
+from users.tests.factories import UserFactory
+
 pytestmark = pytest.mark.django_db
+
+
+@pytest.fixture
+def user():
+    return UserFactory.build()
 
 
 def test_detail(user: settings.AUTH_USER_MODEL):

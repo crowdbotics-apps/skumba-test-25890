@@ -2,9 +2,20 @@ import pytest
 from django.conf import settings
 from django.test import RequestFactory
 
+from users.tests.factories import UserFactory
 from users.views import UserRedirectView, UserUpdateView
 
 pytestmark = pytest.mark.django_db
+
+
+@pytest.fixture
+def user():
+    return UserFactory.create()
+
+
+@pytest.fixture
+def request_factory():
+    return RequestFactory()
 
 
 class TestUserUpdateView:
@@ -33,9 +44,7 @@ class TestUserUpdateView:
         view = UserUpdateView()
         request = request_factory.get("/fake-url/")
         request.user = user
-
         view.request = request
-
         assert view.get_object() == user
 
 
