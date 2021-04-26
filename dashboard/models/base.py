@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 from django.db import models
 
 from dashboard.models.choices import AppTypeChoices, AppFrameWorkChoices, \
-    PlanPriceChoices
+    PlanPriceChoices, PlanNameChoices
 from django.db.models.functions import Length
 
 
@@ -34,10 +34,11 @@ class BaseModelMixin(models.Model):
 
 
 class App(BaseModelMixin):
+    id: int = models.BigAutoField(primary_key=True)
     name: str = models.CharField(
         max_length=50,
     )
-    description: str = models.TextField()
+    description: str = models.TextField(null=True)
     type: str = models.CharField(
         max_length=6,
         choices=[(tag, tag.value) for tag in AppTypeChoices]
@@ -47,9 +48,10 @@ class App(BaseModelMixin):
         choices=[(tag, tag.value) for tag in AppFrameWorkChoices]
     )
     domain_name: str = models.CharField(
-        max_length=50
+        max_length=50,
+        null=True
     )
-    screenshot: str = models.URLField()
+    screenshot: str = models.URLField(null=True)
     user: int = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -67,12 +69,14 @@ class App(BaseModelMixin):
 
 class Plan(BaseModelMixin):
     name: str = models.CharField(
-        max_length=20
+        max_length=20,
+        default=PlanNameChoices.FREE.value,
+        choices=[(tag, tag.value) for tag in PlanNameChoices]
     )
     description: str = models.TextField()
     price: str = models.CharField(
         max_length=3,
-        default=PlanPriceChoices.FREE,
+        default=PlanPriceChoices.FREE.value,
         choices=[(tag, tag.value) for tag in PlanPriceChoices]
     )
 

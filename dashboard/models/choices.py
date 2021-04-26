@@ -15,3 +15,9 @@ class PlanPriceChoices(Enum):
     FREE = "$0"
     STANDARD = "$10"
     PRO = "$25"
+
+
+class PlanNameChoices(Enum):
+    FREE = "Free"
+    STANDARD = "Standard"
+    PRO = "Pro"
