@@ -63,6 +63,14 @@ class App(BaseModelMixin):
             models.CheckConstraint(
                 check=models.Q(name__length__gte=1),
                 name="%(app_label)s_%(class)s_name_length",
+            ),
+            models.CheckConstraint(
+                name="%(app_label)s_%(class)s_type_valid",
+                check=models.Q(type__in=AppTypeChoices.list_values()),
+            ),
+            models.CheckConstraint(
+                name="%(app_label)s_%(class)s_framework_valid",
+                check=models.Q(framework__in=AppFrameWorkChoices.list_values()),
             )
         ]
 
@@ -89,6 +97,14 @@ class Plan(BaseModelMixin):
             models.CheckConstraint(
                 check=models.Q(description__length__gte=1),
                 name="%(app_label)s_%(class)s_description_length",
+            ),
+            models.CheckConstraint(
+                name="%(app_label)s_%(class)s_price_valid",
+                check=models.Q(price__in=PlanPriceChoices.list_values()),
+            ),
+            models.CheckConstraint(
+                name="%(app_label)s_%(class)s_price_valid",
+                check=models.Q(name__in=PlanNameChoices.list_values()),
             )
         ]
 
@@ -96,7 +112,7 @@ class Plan(BaseModelMixin):
 class Subscription(BaseModelMixin):
     app = models.OneToOneField(
         App,
-        on_delete=models.Case,
+        on_delete=models.CASCADE,
     )
     plan = models.ForeignKey(
         Plan,
