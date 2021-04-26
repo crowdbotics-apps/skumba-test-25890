@@ -19,8 +19,9 @@ class AppFactory(DjangoModelFactory):
 
 
 class PlanFactory(DjangoModelFactory):
-    name = "name"
+    name = "Free"
     description = "description"
+    price = "$0"
 
     class Meta:
         model = Plan
