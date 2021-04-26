@@ -27,6 +27,22 @@ class PlanSerializer(serializers.ModelSerializer):
 
 
 class SubscriptionSerializer(serializers.ModelSerializer):
+    app = serializers.PrimaryKeyRelatedField(
+        required=True,
+        queryset=App.objects.all()
+    )
+    plan = serializers.PrimaryKeyRelatedField(
+        required=True,
+        queryset=Plan.objects.all()
+    )
+    user = serializers.PrimaryKeyRelatedField(
+        read_only=True,
+        default=serializers.CurrentUserDefault()
+    )
+    active = serializers.BooleanField(required=True)
+
     class Meta:
         model = Subscription
-        fields = "__all__"
+        fields = [
+            "id", "user", "plan", "app", "active", "created_at", "updated_at"
+        ]
