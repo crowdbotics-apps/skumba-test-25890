@@ -9,7 +9,7 @@ from ...models import PlanNameChoices
 
 
 class AppViewSet(viewsets.ModelViewSet):
-    queryset = App.objects.all().order_by('-created_at')
+    queryset = App.objects.all().order_by("-created_at")
     serializer_class = AppSerializer
     permission_classes = (IsAuthenticated,)
 
@@ -49,14 +49,30 @@ class AppViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
+    def destroy(self, request, pk):
+        try:
+            App.objects.filter(id=pk).delete()
+            return Response({"Message" "successfully deleted App"})
+        except Exception as error:
+            return Response({"Error": str(error)})
+
+    def partial_update(self, request, pk):
+        try:
+            return super().partial_update(request, pk)
+        except Exception as error:
+            return Response(
+                {"Error": str(error)},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
 
 class PlanViewSet(viewsets.ModelViewSet):
-    queryset = Plan.objects.all().order_by('-created_at')
+    queryset = Plan.objects.all().order_by("-created_at")
     serializer_class = PlanSerializer
     permission_classes = (IsAuthenticated,)
 
 
 class SubscriptionViewSet(viewsets.ModelViewSet):
-    queryset = Subscription.objects.all().order_by('-created_at')
+    queryset = Subscription.objects.all().order_by("-created_at")
     serializer_class = SubscriptionSerializer
     permission_classes = (IsAuthenticated,)
