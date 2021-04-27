@@ -1,7 +1,12 @@
+from django.http import JsonResponse
 from django.urls import path
+
+from .views import ping
 from .viewsets import AppViewSet, PlanViewSet, SubscriptionViewSet
 
+
 urlpatterns = [
+    path("ping/", ping, name="ping"),
     path(
         "apps/",
         AppViewSet.as_view({"post": "create", "get": "list"}),
