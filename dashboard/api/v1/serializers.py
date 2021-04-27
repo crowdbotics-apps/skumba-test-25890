@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from rest_framework import serializers
 
 from dashboard.models import App, Plan, Subscription
@@ -20,6 +22,18 @@ class AppSerializer(serializers.ModelSerializer):
 
 
 class PlanSerializer(serializers.ModelSerializer):
+    name: str = serializers.CharField(
+        max_length=20,
+        min_length=1,
+        required=True
+    )
+    description: str = serializers.CharField(min_length=1)
+    price: Decimal = serializers.DecimalField(
+        coerce_to_string=True,
+        decimal_places=2,
+        max_digits=4
+    )
+
     class Meta:
         model = Plan
         fields = ["id", "name", "description", "price", "created_at",
