@@ -1,3 +1,4 @@
+from decimal import Decimal
 from enum import Enum
 
 
@@ -19,9 +20,9 @@ class AppFrameWorkChoices(ChoiceEnum):
 
 
 class PlanPriceChoices(ChoiceEnum):
-    FREE = "$0"
-    STANDARD = "$10"
-    PRO = "$25"
+    FREE = Decimal(0)
+    STANDARD = Decimal(10)
+    PRO = Decimal(25)
 
 
 class PlanNameChoices(ChoiceEnum):
